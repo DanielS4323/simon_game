@@ -4,65 +4,73 @@ const green = document.querySelector(".green");
 const blue = document.querySelector(".blue");
 const startBtn = document.querySelector("#startBtn");
 const resetBtn = document.querySelector("#resetBtn");
-const redS = document.getElementById('s-green')
-
-
-
-
-
+const playerSound = document.getElementById("s-blue");
+const computerSound = document.getElementById("s-yellow");
+const losingSound = document.getElementById("losingSound");
+const nextRoundSound = document.getElementById("nextSound");
 
 function getRandomPanel() {
-    const panels = [red, yellow, blue, green]
-    return panels[parseInt(Math.random() * panels.length)]
-  
-    
-  }
+  const panels = [red, yellow, blue, green];
+  //get one random panel
+  return panels[parseInt(Math.random() * panels.length)];
+}
 
-  const sequence = [getRandomPanel()]
-  let sequenceToMatch = [...sequence]
+const sequence = [getRandomPanel()];
+let sequenceToMatch = [...sequence];
+
+
 
 const flash = (panel) => {
-    return new Promise((resolve, reject) => {
-        panel.classList.add('active')
-        redS.play()
-        setTimeout(() => {
-             panel.classList.remove('active');
-
-             setTimeout(() => {
-                 resolve()
-             }, 250);
-        },1000)
-    })
-} 
-
-let canClick = false
-
-const panelClicked = (panelClicked) => {
-    if(!canClick) return
-    const expectedPanel = sequenceToMatch.shift()
-    if(expectedPanel === panelClicked) {
-        if(sequenceToMatch.length === 0) {
-            //start new round
-            sequence.push(getRandomPanel())
-            sequenceToMatch = [...sequence]
-            startFlashing()
-        }
-    } else {
-        //end game
-        alert('GAME OVER')
-    }
-}
+  return new Promise((resolve, reject) => {
+      //add flashing to panel and sound
+    panel.classList.add("active");
+    computerSound.play();
+    setTimeout(() => {
+        //remove flashing
+      panel.classList.remove("active");
+      setTimeout(() => {
+        resolve();
+      }, 250);
+    }, 1000);
+  });
+};
 
 const startFlashing = async () => {
-    canClick = false
-    for(let panel of sequence) {
-        await flash(panel)
-      }
-      canClick = true
-}
-    
+    canClick = false;
+    for (let panel of sequence) {
+      await flash(panel);
+    }
+    canClick = true;
+  };
 
-    startBtn.addEventListener('click',startFlashing)
-    resetBtn.addEventListener('click',() => location.reload())
+let canClick = false;
+
+const panelClicked = (panelClicked) => {
+
+  if (!canClick) return;
+  if (sequence.length > 1) playerSound.play();
+
+  const expectedPanel = sequenceToMatch.shift();
+  if (expectedPanel === panelClicked) {
+    if (sequenceToMatch.length === 0) {
+      //start new round
+      setTimeout(() => {
+        nextRoundSound.play();
+      }, 500);
+      sequence.push(getRandomPanel());
+      sequenceToMatch = [...sequence];
+      setTimeout(() => {
+        startFlashing();
+      }, 3000);
+    }
+  } else {
+    //end game
+    alert("GAME OVER, please restart the game and try again.");
+    losingSound.play();
+  }
+};
 
 
+
+startBtn.addEventListener("click", startFlashing);
+resetBtn.addEventListener("click", () => location.reload());
