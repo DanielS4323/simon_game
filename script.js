@@ -65,8 +65,8 @@ const panelClicked = (panelClicked) => {
     }
   } else {
     //end game
-    alert("GAME OVER, please restart the game and try again.");
     losingSound.play();
+    alert("GAME OVER, please restart the game and try again.");
   }
 };
 
