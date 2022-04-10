@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.314);
+}
+
+.container {
+  margin: 3em auto;
+  width: 80em;
+  height: 35em;
+  background-color: rgba(20, 20, 20, 0.005);
+  display: grid;
+  grid-template-columns: 18em 18em;
+  grid-row: auto auto;
+  justify-content: center;
+  position: relative;
+}
+
+.box:hover {
+  animation: pulse 0.5s;
+  border: 5px solid cyan;
+  cursor: pointer;
+}
+
+.red {
+  background-color: red;
+  border-top-left-radius: 100%;
+}
+.blue {
+  background-color: blue;
+  border-bottom-right-radius: 100%;
+}
+.yellow {
+  background-color: yellow;
+  border-bottom-left-radius: 100%;
+}
+.green {
+  background-color: green;
+  border-top-right-radius: 100%;
+}
+
+.red,
+.green,
+.blue,
+.yellow {
+  border: 0.8em solid black;
+}
+
+#startBtn {
+  position: absolute;
+  border-radius: 50%;
+  top: 70%;
+  left: 20%;
+  padding: 10px 10px;
+  cursor: pointer;
+  background-color: green;
+  border: 1px solid black;
+}
+
+#resetBtn {
+  position: absolute;
+  border-radius: 50%;
+  top: 70%;
+  left: 64%;
+  padding: 10px 10px;
+  cursor: pointer;
+  background-color: red;
+  border: 1px solid black;
+}
+.start {
+  position: absolute;
+  top: 55%;
+  left: 17%;
+}
+.reset {
+  position: absolute;
+  top: 55%;
+  left: 60%;
+}
+
+.controls {
+  width: 12em;
+  height: 12em;
+  background-color: gray;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 15px solid black;
+}
+
+h1 {
+  position: absolute;
+  top: 8%;
+  left: 25%;
+  transform: translate(0, -8%);
+}
+
+.active {
+  background-color: white;
+  animation: pulse 1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  70% {
+    transform: scale(1.105);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
