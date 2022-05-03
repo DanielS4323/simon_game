@@ -24,6 +24,7 @@ const flash = (panel) => {
   return new Promise((resolve, reject) => {
       //add flashing to panel and sound
     panel.classList.add("active");
+    computerSound.currentTime = 0
     computerSound.play();
     setTimeout(() => {
         //remove flashing
@@ -55,6 +56,7 @@ const panelClicked = (panelClicked) => {
     if (sequenceToMatch.length === 0) {
       //start new round
       setTimeout(() => {
+        nextRoundSound.currentTime = 0
         nextRoundSound.play();
       }, 500);
       sequence.push(getRandomPanel());
@@ -65,6 +67,7 @@ const panelClicked = (panelClicked) => {
     }
   } else {
     //end game
+    losingSound.currentTime = 0
     losingSound.play();
     alert("GAME OVER, please restart the game and try again.");
   }
