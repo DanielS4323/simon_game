@@ -46,7 +46,6 @@ const startFlashing = async () => {
 let canClick = false;
 
 const panelClicked = (panelClicked) => {
-  console.log(panelClicked.dataset.color);
   const sound = document.querySelector(
     `audio[data-color="${panelClicked.dataset.color}"]`
   );
